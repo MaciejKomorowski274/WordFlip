@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Name="AcronymListViewPage"
+             x:Class="HelloWorld.Views.ListViewPage"
+             NavigationPage.HasNavigationBar="False"
+             >
+    <StackLayout BackgroundColor="#FF1C1C1C" >
+    <ListView HasUnevenRows="True"
+              IsPullToRefreshEnabled="True"
+              RefreshCommand="{Binding RefreshAcronymListCommand}"
+              ItemsSource="{Binding AcronymList}"
+              IsRefreshing="{Binding IsRefreshing}"
+              ItemSelected="AcronymListView_ItemSelected"
+              IsGroupingEnabled="True"
+              GroupDisplayBinding="{Binding Title}"
+              ItemTapped="AcronymListView_ItemTapped"    
+
+              >
+        <ListView.GroupHeaderTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Orientation="Horizontal"
+                                 HorizontalOptions="FillAndExpand">
+                        <Label Text="{Binding Title}"
+                               HorizontalOptions="StartAndExpand" TextColor="White" FontSize="25" FontAttributes="Bold"/>
+                        <Button Text="Show/Hide"
+                                Clicked="Button_Clicked_1"
+                                CommandParameter="{Binding .}"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.GroupHeaderTemplate>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout HorizontalOptions="FillAndExpand" 
+                                 Orientation="Horizontal"
+                                 Margin="15,0,15,0">
+                        
+                        <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand">
+                                <Label Text="{Binding Name}" FontSize="16" WidthRequest="100" TextColor="White" FontAttributes="Bold"/>
+                           
+                        </StackLayout>
+                            <Button Text="Details" 
+                                    WidthRequest="80" 
+                                    HeightRequest="40" 
+                                    Clicked="Button_Clicked"
+                                    VerticalOptions="Center"/>
+                        </StackLayout>
+                    <ViewCell.ContextActions>
+                        <MenuItem Text="Details" Clicked="MenuItem_Clicked" CommandParameter="{Binding .}" />
+                        <MenuItem Text="Remove"
+                                  Command="{Binding Source={x:Reference AcronymListViewPage}, Path=BindingContext.RemoveAcronymCommand}"  
+                                  CommandParameter="{Binding .}" IsDestructive="True" />
+                    </ViewCell.ContextActions>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+        <Button Text="Dodaj fiszke"
+                Command="{Binding AddAcronymCommand}"/>
+    </StackLayout>
+</ContentPage>

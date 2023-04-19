@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="HelloWorld.Views.AddAcronymPage">
+    <StackLayout Margin="30" >
+        <Label Text="Dodawanie Nowej fiszki"
+               HorizontalOptions="Center"
+               FontSize="Large"/>
+        <Label Text="Skrót"/>
+        <Entry Text="{Binding Name}"
+               Placeholder="Skrót"/>
+        <Label Text="Angielski Skrót"/>
+        <Entry Text="{Binding TranslationEnglish}"
+               Placeholder="Angielski Skrót"/>
+        <Label Text="Polski Skrót"/>
+        <Entry Text="{Binding TranslationPolish}"
+               Placeholder="Polski Skrót"/>
+        <Label Text="Kategorie"/>
+        <Picker ItemsSource="{Binding AcronymTypes}"
+                 SelectedItem="{Binding SelectedType}"/>
+        <Button Text="Zapisz"
+                Command="{Binding SaveAcronymCommand}"/>
+    </StackLayout>
+</ContentPage>
